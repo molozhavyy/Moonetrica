@@ -1,0 +1,255 @@
+.dashboard {
+    font-family: Raleway;
+    padding-right: 32px !important;
+    padding-left: 0 !important;
+}
+
+.nav-link {
+    padding:8px 16px 20px !important;
+    img {
+        margin-right: 10px;
+    }
+    span {
+        font-family: Raleway;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+}
+.tab-content {
+    padding: 20px 0;
+    .change {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .plus {
+        color: #35FF7A;
+    }
+    .minus {
+        color: #FF6161;
+    }
+}
+.card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 18px !important;
+    .card-title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 23px;
+        padding: 0 15px;
+    }
+    .card-body {
+        padding: 0 20px 20px;
+    }
+}
+
+
+.statis {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.statis div {
+    margin-right: 56px;
+}
+.statis-title {
+    color: #FFF;
+    opacity: 0.5;
+    margin-bottom: 5px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.statis-detail {
+    color: #FFF;
+    opacity: 1;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: bold;
+}
+/* Portfolio Exposure Section */
+.chart-legend {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: scroll;
+    height: 300px;
+
+    p {
+        margin-bottom: 30px;
+    }
+    img {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+        background-color: #F00;
+        border-radius: 5px;
+        margin: 0 5px;
+        display: inline-block;
+        position: relative;
+        top: 1px;
+    }
+    .series {
+        float: right;
+    
+    }
+}
+/* Asset Allocation Section */
+.asset-prog {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: scroll;
+    height: 300px;
+    .prog {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+    img {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+    }
+    .progress {
+        width: 70%;
+        height: 4px;
+    }
+    .series {
+        width: 10%;
+        text-align: right;
+    }
+}
+
+.accordion-item {
+    border: none !important;
+}
+
+/* Wallet Section */
+#walletScan {
+    padding: 0 15px;
+    img {
+        margin-right: 7px;
+    }
+}
+.table-header {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(255, 255, 255, 0.5);
+}
+.hide-check {
+    margin-left: 20px;
+    margin-right: 10px;
+    width: 14px !important;
+    height: 14px !important;
+}
+.check-label {
+    font-size: 14px;
+}
+
+.accordion-header {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFF;
+    padding: 15px 0;
+}
+.wallet-detail {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFF;
+    padding: 8px 20px !important;
+}
+.wallet-detail .item {
+    padding: 0 10px;
+    img {
+        margin-right: 10px;
+    }
+}
+
+/* Defi Section */
+#defi {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFF;
+    padding: 0 15px;
+    img {
+        margin-right: 7px;
+    }
+}
+
+#defi .balance {
+    padding: 0;
+    position: relative;
+    left: -10px;
+}
+#defi .symbol {
+    margin: 0;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(255, 255, 255, 0.5);
+}
+.detail-title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+    margin-top: 15px;
+}
+.table-row {
+    padding: 15px 0
+}
+.total-sum {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 900;
+}
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.banner-title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+.drop-btn {
+    float: right;
+    width: 12px;
+    height: 7px;
+    color: #FFF;
+}
+.drop-btn.active {
+    transform: rotate(180deg);
+    position: relative;
+    top: 7px;    
+}

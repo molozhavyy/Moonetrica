@@ -94,26 +94,26 @@ const SidebarContent = props => {
         <div id="sidebar-menu">
           <ul className="metismenu list-unstyled" id="side-menu">
             <li>
-              <Link to="#" className=" ">
-                <img src="assets/img/dashboard.svg" width="15px" height="15px" style={{marginRight:'10px'}} />
+              <Link to="/dashboard" className=" ">
+                <img src="assets/img/dashboard.svg" width="18px" height="18px" style={{marginRight:'10px'}} />
                 <span style={{fontSize:'16px'}}>{props.t("Dashboard")}</span>
               </Link>
             </li>
             <li>
               <Link to="#" className=" ">
-                <img src="assets/img/suggestion.svg" width="15px" height="15px" style={{marginRight:'10px'}} />
+                <img src="assets/img/suggestion.svg" width="18px" height="18px" style={{marginRight:'10px'}} />
                 <span style={{fontSize:'16px'}}>{props.t("Suggestion")}</span>
               </Link>
             </li>
             <li>
               <Link to="#" className=" ">
-              <img src="assets/img/donate.svg" width="15px" height="15px" style={{marginRight:'10px'}} />
+              <img src="assets/img/donate.svg" width="18px" height="18px" style={{marginRight:'10px'}} />
                 <span style={{fontSize:'16px'}}>{props.t("Donate")}</span>
               </Link>
             </li>
             <li>
               <Link to="#" className=" ">
-              <img src="assets/img/defi.svg" width="15px" height="15px" style={{marginRight:'10px'}} />
+              <img src="assets/img/defi.svg" width="18px" height="18px" style={{marginRight:'10px'}} />
                 <span style={{fontSize:'16px'}}>{props.t("Defi Protocols")}</span>
               </Link>
             </li>

@@ -8,6 +8,9 @@
   justify-content: center;
   align-items: center;
   margin-top: 150px;
+  @media (max-width: 991.98px) {
+    display: none;
+  }
 
 }
 
@@ -53,11 +56,11 @@
   position: fixed;
   top: 0;
   // padding-top: $header-height;
-  padding-top: 80px;
+  padding-top: 100px;
   // box-shadow: $box-shadow;
   @media (max-width: 991.98px) {
-    top: $header-height;
-    padding-top: 0px;
+    // top: $header-height;
+    // padding-top: 0px;
   }
 
   .navbar-brand-box {
@@ -106,7 +109,7 @@
     li {
       a {
         display: block;
-        padding: 20px 32px;
+        padding: 15px 32px 35px;
         color: $sidebar-menu-item-color;
         position: relative;
         font-size: 13px;
@@ -121,6 +124,12 @@
           vertical-align: middle;
           color: $sidebar-menu-item-icon-color;
           transition: all 0.4s;
+        }
+
+        span {
+          position: relative;
+          top: 2px;
+          font-size: 18px;
         }
 
         &:hover {
@@ -199,11 +208,18 @@
 @media (max-width: 992px) {
   .vertical-menu {
     display: none;
+    // ul li a span {
+    //   display: none;
+    // }
   }
 
   .main-content {
-    margin-left: 0 !important;
+    margin-left: 32px;
     margin-right: 32px;
+    @media (max-width: 600px) {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
   }
 
   body.sidebar-enable {
@@ -219,9 +235,9 @@
     margin-left: $sidebar-collapsed-width;
   }
 
-  .navbar-brand-box {
-    width: $sidebar-collapsed-width !important;
-  }
+  // .navbar-brand-box {
+  //   width: $sidebar-collapsed-width !important;
+  // }
 
   #page-topbar {
     left: $sidebar-collapsed-width;
@@ -230,21 +246,22 @@
     }
   }
 
-  .logo {
-    span.logo-lg {
-      display: none;
-    }
+  // .logo {
+  //   span.logo-lg {
+  //     display: none;
+  //   }
 
-    span.logo-sm {
-      display: block;
-    }
-  }
+  //   span.logo-sm {
+  //     display: block;
+  //   }
+  // }
 
   // Side menu
   .vertical-menu {
     position: absolute;
-    width: $sidebar-collapsed-width !important;
-    z-index: 5;
+    // width: $sidebar-collapsed-width !important;
+    background-image: linear-gradient(to right, #253d51, #151e34) !important;
+    z-index: 1000 !important;
 
     .simplebar-mask,
     .simplebar-content-wrapper {
@@ -283,7 +300,7 @@
           white-space: nowrap;
 
           > a {
-            padding: 15px 20px;
+            padding: 15px 32px 35px;
             min-height: 55px;
             transition: none;
 
@@ -298,16 +315,15 @@
               margin-left: 4px;
             }
 
-            span {
-              display: none;
-              padding-left: 25px;
-            }
+            // span {
+            //   display: none;
+            //   padding-left: 25px;
+            // }
           }
 
           &:hover {
             > a {
               position: relative;
-              width: calc(190px + #{$sidebar-collapsed-width});
               color: $primary;
               background-color: darken($sidebar-bg, 4%);
               transition: none;

@@ -29,7 +29,7 @@ const Dashboard = (props) => {
 
   const {walletAddress} = props;
   const [customActiveTab, setcustomActiveTab] = useState("1");
-  const [col1, setcol1] = useState(true)
+  const [col1, setcol1] = useState(false)
   const [col2, setcol2] = useState(false)
   const [col3, setcol3] = useState(false)
   const [col4, setcol4] = useState(false)
@@ -109,7 +109,7 @@ const Dashboard = (props) => {
           walletAddress?
           <Container fluid>
             <Row>
-              <Col lg={12} style={{padding:'0'}}>
+              <Col sm={12} style={{paddingRight:'0', paddingLeft:'0'}}>
                 <Nav tabs className="nav-tabs-custom">
                   <NavItem>
                     <NavLink style={{ cursor: "pointer" }}
@@ -136,7 +136,7 @@ const Dashboard = (props) => {
                 <TabContent activeTab={customActiveTab}>
                   <TabPane tabId="1">
                     <Row>
-                      <Col sm="12" className="statis">
+                      <Col sm={12} md={12} lg={6} className="statis-1">
                         <div className="mr-56 ">
                           <p className="statis-title">Net worth</p>
                           <p className="statis-detail" >$0 <span className="plus change"> + $0 </span> </p>
@@ -153,6 +153,8 @@ const Dashboard = (props) => {
                           <p className="statis-title">Total debts</p>
                           <p className="statis-detail" >$0</p>
                         </div>
+                      </Col>
+                      <Col sm={12} md={12} lg={6} className="statis-2">
                         <div className="mr-56 ">
                           <p className="statis-title">APR daily/yearly</p>
                           <p className="statis-detail" >7.15/788.14%</p>
@@ -160,23 +162,22 @@ const Dashboard = (props) => {
                         <div className="mr-56 ">
                           <p className="statis-title">Prediction Profit daily/yearly</p>
                           <p className="statis-detail" >1.911/11.931</p>
-                        </div>
-
+                        </div>  
                       </Col>
                     </Row>
 
                     <Row>
-                      <Col sm="6">
+                      <Col sm={12} md={12} lg={6}>
                         <Card>
                           <CardHeader>
                             <CardTitle className="h4">Portfolio Exposure</CardTitle>
                           </CardHeader>
-                          <CardBody style={{ height:'320px' }}>
+                          <CardBody>
                             <Row style={{height:'100%'}}>
-                              <Col sm="7">
+                              <Col sm={12} md={12} lg={7}>
                                 <ReactApexChart options={options} series={series} type="donut" height="300px" />
                               </Col>
-                              <Col sm="5">
+                              <Col sm={12} md={12} lg={5}>
                                 <div className="chart-legend">
                                 {
                                   series.map( (val, id) => 
@@ -193,23 +194,31 @@ const Dashboard = (props) => {
                           </CardBody>
                         </Card>
                       </Col>
-                      <Col sm="6">
+                      <Col sm={12} md={12} lg={6}>
                         <Card>
                           <CardHeader>
                             <CardTitle className="h4">Asset Allocation</CardTitle>
                           </CardHeader>
-                          <CardBody style={{ height:'320px' }}>
+                          <CardBody>
                             <Row style={{height:'100%'}}>
                               <Col sm="12">
                                 <div className="asset-prog">
                                   {
                                     series.map( (val, id) => 
                                       <div key={id} className="prog">
-                                        <p style={{width:'20%', margin:'0'}}> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
+                                        <p className="asset-name"> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
                                         <Progress color="warning" value={val}></Progress>
                                         <span className="series"> {val} % </span>
                                       </div>
                                   )}
+                                  {/* {
+                                    series.map( (val, id) => 
+                                      <div key={id} className="prog">
+                                        <p style={{width:'20%', margin:'0'}}> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
+                                        <Progress color="warning" value={val}></Progress>
+                                        <span className="series"> {val} % </span>
+                                      </div>
+                                  )} */}
                                 </div>
                               </Col>
                             </Row>
@@ -223,112 +232,43 @@ const Dashboard = (props) => {
                         <Card>
                           <CardHeader>
                             <CardTitle>
-                              <span> Wallet </span>
-                              <input className="hide-check" type="checkbox" value="" id="defaultCheck1" />
-                              <span className="check-label">Hide small balances</span>
-                              <span className="table-header" style={{float:'right'}}> Assets <span style={{color:'#FFC519', fontSize:'16px', fontWeight:'700', marginLeft:'5px'}}> $5.066 </span> </span>
+                              <p className="d-response">
+                                <span> Wallet </span>
+                                <input className="hide-check" type="checkbox" value="" id="defaultCheck1" title="Hide small balances" />
+                                <span className="check-label">Hide small balances</span>
+                                <span className="table-header" style={{float:'right'}}> Assets <span style={{color:'#FFC519', fontSize:'16px', fontWeight:'700', marginLeft:'5px'}}> $5.066 </span> </span>
+                              </p>
+                              <p className="m-response">
+                                <input className="hide-check" type="checkbox" value="" id="defaultCheck1" title="Hide small balances" />
+                                <span className="check-label">Hide small balances</span>
+                              </p>
+
                             </CardTitle>
                           </CardHeader>
-                          <CardBody>
+                          <CardBody style={{overflow:'auto'}}>
                             <div className="accordion" id="walletScan">
                               <div className="accordion-item">
                                 <Row className="table-header">
-                                  <Col sm="3"> Assets </Col>
-                                  <Col sm="3"> Balances </Col>
-                                  <Col sm="3"> Price </Col>
-                                  <Col sm="3"> Value </Col>
+                                  <Col lx="3"> Assets </Col>
+                                  <Col lx="3"> Balances </Col>
+                                  <Col lx="3"> Price </Col>
+                                  <Col lx="3"> Value </Col>
                                 </Row>
                               </div>
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col1} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
                                       <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col1} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
                                 <Collapse isOpen={col1} className="accordion-collapse">
                                   <div className="accordion-body wallet-detail">
-                                    <span className="table-header">Explorer:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      PolygonScan
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      MaticVigit
-                                    </span>
-                                    <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      SushiSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      QuickSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      Dfyn
-                                    </span>
-                                  </div>
-                                </Collapse>
-                              </div>
-                              <div className="accordion-item">
-                                <div className="accordion-header">
-                                  <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
-                                      <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col2} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
-                                    </Col>
-                                  </Row>
-                                </div>
-
-                                <Collapse isOpen={col2} className="accordion-collapse">
-                                    <div className="accordion-body wallet-detail">
-                                    <span className="table-header">Explorer:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      PolygonScan
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      MaticVigit
-                                    </span>
-                                    <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      SushiSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      QuickSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      Dfyn
-                                    </span>
-                                  </div>
-                                </Collapse>
-                              </div>
-                              <div className="accordion-item">
-                                <div className="accordion-header">
-                                  <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
-                                      <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col3} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
-                                    </Col>
-                                  </Row>
-                                </div>
-                                <Collapse isOpen={col3} className="accordion-collapse">
-                                    <div className="accordion-body wallet-detail">
+                                    <p className="explorer">
                                       <span className="table-header">Explorer:</span>
                                       <span className="item"> 
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
@@ -338,7 +278,9 @@ const Dashboard = (props) => {
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         MaticVigit
                                       </span>
-                                      <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
+                                    </p>
+                                    <p className="trade">
+                                      <span className="table-header">Trade:</span>
                                       <span className="item"> 
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         SushiSwap
@@ -351,6 +293,92 @@ const Dashboard = (props) => {
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         Dfyn
                                       </span>
+                                    </p>
+                                  </div>
+                                </Collapse>
+                              </div>
+                              <div className="accordion-item">
+                                <div className="accordion-header" onClick={t_col2} style={{ cursor: "pointer" }}>
+                                  <Row>
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
+                                      <span className= {col2? 'drop-btn':'drop-btn active'} onClick={t_col2} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                    </Col>
+                                  </Row>
+                                </div>
+
+                                <Collapse isOpen={col2} className="accordion-collapse">
+                                  <div className="accordion-body wallet-detail">
+                                      <p className="explorer">
+                                        <span className="table-header">Explorer:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          PolygonScan
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          MaticVigit
+                                        </span>
+                                      </p>
+                                      <p className="trade">
+                                        <span className="table-header">Trade:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          SushiSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          QuickSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          Dfyn
+                                        </span>
+                                      </p>
+                                    </div>
+                                </Collapse>
+                              </div>
+                              <div className="accordion-item">
+                                <div className="accordion-header" onClick={t_col3} style={{ cursor: "pointer" }}>
+                                  <Row>
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
+                                      <span className= {col3? 'drop-btn':'drop-btn active'} onClick={t_col3} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                    </Col>
+                                  </Row>
+                                </div>
+                                <Collapse isOpen={col3} className="accordion-collapse">
+                                  <div className="accordion-body wallet-detail">
+                                      <p className="explorer">
+                                        <span className="table-header">Explorer:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          PolygonScan
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          MaticVigit
+                                        </span>
+                                      </p>
+                                      <p className="trade">
+                                        <span className="table-header">Trade:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          SushiSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          QuickSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          Dfyn
+                                        </span>
+                                      </p>
                                     </div>
                                 </Collapse>
                               </div>
@@ -366,37 +394,37 @@ const Dashboard = (props) => {
                           <CardHeader>
                             <CardTitle className="h4">DEFI platform name</CardTitle>
                           </CardHeader>
-                          <CardBody>
+                          <CardBody style={{overflow:'auto'}}>
                             <div className="accordion" id="defi">
-                              <div className="accordion-item test">
+                              <div className="accordion-item">
                                 <Row className="table-header">
-                                  <Col sm="3"> Pool </Col>
-                                  <Col sm="3" className="balance">  Balances </Col>
-                                  <Col sm="2"> Rewards </Col>
-                                  <Col sm="2"> APR </Col>
-                                  <Col sm="2"> Value </Col>
+                                  <Col xs="3"> Pool </Col>
+                                  <Col xs="3" className="balance">  Balances </Col>
+                                  <Col xs="2"> Rewards </Col>
+                                  <Col xs="2"> APR </Col>
+                                  <Col xs="2"> Value </Col>
                                 </Row>
                               </div>
 
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col4} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
-                                    <Col sm="3" className="balance"> 
+                                    <Col xs="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
+                                    <Col xs="3" className="balance"> 
                                       <p className="m-0">2,109.5 WMATIC + 5,175.813 OMEN</p>
                                       <p className="symbol">$4547.66</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">7.735 OMEN</p>
                                       <p  className="symbol">$3423(1=$0.057)</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">788.14%</p>
                                       <p  className="symbol">2.16% daily</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       $4550.983
-                                      <span className= {col4? 'drop-btn active':'drop-btn'} onClick={t_col4} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                      <span className= {col4? 'drop-btn':'drop-btn active'} onClick={t_col4} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
@@ -404,85 +432,85 @@ const Dashboard = (props) => {
                                   <div className="accordion-body wallet-detail">
                                     <p className="detail-title"> Underlying Assets </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="minus change"> -1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="minus change"> -1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum" >
-                                      <Col sm="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <p className="detail-title"> Rewards </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum">
-                                      <Col sm="2"> TOTAL </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> TOTAL </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                   </div>
                                 </Collapse>
                               </div>
 
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col5} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
-                                    <Col sm="3" className="balance"> 
+                                    <Col xs="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
+                                    <Col xs="3" className="balance"> 
                                       <p className="m-0">2,109.5 WMATIC + 5,175.813 OMEN</p>
                                       <p className="symbol">$4547.66</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">7.735 OMEN</p>
                                       <p  className="symbol">$3423(1=$0.057)</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">788.14%</p>
                                       <p  className="symbol">2.16% daily</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       $4550.983
-                                      <span className= {col5? 'drop-btn active':'drop-btn'} onClick={t_col5} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                      <span className= {col5? 'drop-btn':'drop-btn active'} onClick={t_col5} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
@@ -490,78 +518,75 @@ const Dashboard = (props) => {
                                   <div className="accordion-body wallet-detail">
                                     <p className="detail-title"> Underlying Assets </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="minus change"> -1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="minus change"> -1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum" >
-                                      <Col sm="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <p className="detail-title"> Rewards </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum">
-                                      <Col sm="2"> TOTAL </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> TOTAL </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                   </div>
                                 </Collapse>
                               </div>
-
 
                             </div>
                           </CardBody>
                         </Card>
                       </Col>
                     </Row>
-
-
                   </TabPane>
                   <TabPane tabId="2">
                     <Row>
-                      <Col sm="12" className="statis">
+                      <Col sm={12} md={12} lg={6} className="statis-1">
                         <div className="mr-56 ">
                           <p className="statis-title">Net worth</p>
                           <p className="statis-detail" >$0 <span className="plus change"> + $0 </span> </p>
@@ -578,6 +603,8 @@ const Dashboard = (props) => {
                           <p className="statis-title">Total debts</p>
                           <p className="statis-detail" >$0</p>
                         </div>
+                      </Col>
+                      <Col sm={12} md={12} lg={6} className="statis-2">
                         <div className="mr-56 ">
                           <p className="statis-title">APR daily/yearly</p>
                           <p className="statis-detail" >7.15/788.14%</p>
@@ -585,23 +612,22 @@ const Dashboard = (props) => {
                         <div className="mr-56 ">
                           <p className="statis-title">Prediction Profit daily/yearly</p>
                           <p className="statis-detail" >1.911/11.931</p>
-                        </div>
-
+                        </div>  
                       </Col>
                     </Row>
 
                     <Row>
-                      <Col sm="6">
+                      <Col sm={12} md={12} lg={6}>
                         <Card>
                           <CardHeader>
                             <CardTitle className="h4">Portfolio Exposure</CardTitle>
                           </CardHeader>
-                          <CardBody style={{ height:'320px' }}>
+                          <CardBody>
                             <Row style={{height:'100%'}}>
-                              <Col sm="7">
+                              <Col sm={12} md={12} lg={7}>
                                 <ReactApexChart options={options} series={series} type="donut" height="300px" />
                               </Col>
-                              <Col sm="5">
+                              <Col sm={12} md={12} lg={5}>
                                 <div className="chart-legend">
                                 {
                                   series.map( (val, id) => 
@@ -618,19 +644,19 @@ const Dashboard = (props) => {
                           </CardBody>
                         </Card>
                       </Col>
-                      <Col sm="6">
+                      <Col sm={12} md={12} lg={6}>
                         <Card>
                           <CardHeader>
                             <CardTitle className="h4">Asset Allocation</CardTitle>
                           </CardHeader>
-                          <CardBody style={{ height:'320px' }}>
+                          <CardBody>
                             <Row style={{height:'100%'}}>
                               <Col sm="12">
                                 <div className="asset-prog">
                                   {
                                     series.map( (val, id) => 
                                       <div key={id} className="prog">
-                                        <p style={{width:'20%', margin:'0'}}> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
+                                        <p className="asset-name"> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
                                         <Progress color="warning" value={val}></Progress>
                                         <span className="series"> {val} % </span>
                                       </div>
@@ -648,112 +674,43 @@ const Dashboard = (props) => {
                         <Card>
                           <CardHeader>
                             <CardTitle>
-                              <span> Wallet </span>
-                              <input className="hide-check" type="checkbox" value="" id="defaultCheck1" />
-                              <span className="check-label">Hide small balances</span>
-                              <span className="table-header" style={{float:'right'}}> Assets <span style={{color:'#FFC519', fontSize:'16px', fontWeight:'700', marginLeft:'5px'}}> $5.066 </span> </span>
+                              <p className="d-response">
+                                <span> Wallet </span>
+                                <input className="hide-check" type="checkbox" value="" id="defaultCheck1" title="Hide small balances" />
+                                <span className="check-label">Hide small balances</span>
+                                <span className="table-header" style={{float:'right'}}> Assets <span style={{color:'#FFC519', fontSize:'16px', fontWeight:'700', marginLeft:'5px'}}> $5.066 </span> </span>
+                              </p>
+                              <p className="m-response">
+                                <input className="hide-check" type="checkbox" value="" id="defaultCheck1" title="Hide small balances" />
+                                <span className="check-label">Hide small balances</span>
+                              </p>
+
                             </CardTitle>
                           </CardHeader>
-                          <CardBody>
+                          <CardBody style={{overflow:'auto'}}>
                             <div className="accordion" id="walletScan">
                               <div className="accordion-item">
                                 <Row className="table-header">
-                                  <Col sm="3"> Assets </Col>
-                                  <Col sm="3"> Balances </Col>
-                                  <Col sm="3"> Price </Col>
-                                  <Col sm="3"> Value </Col>
+                                  <Col lx="3"> Assets </Col>
+                                  <Col lx="3"> Balances </Col>
+                                  <Col lx="3"> Price </Col>
+                                  <Col lx="3"> Value </Col>
                                 </Row>
                               </div>
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col1} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
                                       <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col1} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
                                 <Collapse isOpen={col1} className="accordion-collapse">
                                   <div className="accordion-body wallet-detail">
-                                    <span className="table-header">Explorer:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      PolygonScan
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      MaticVigit
-                                    </span>
-                                    <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      SushiSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      QuickSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      Dfyn
-                                    </span>
-                                  </div>
-                                </Collapse>
-                              </div>
-                              <div className="accordion-item">
-                                <div className="accordion-header">
-                                  <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
-                                      <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col2} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
-                                    </Col>
-                                  </Row>
-                                </div>
-
-                                <Collapse isOpen={col2} className="accordion-collapse">
-                                    <div className="accordion-body wallet-detail">
-                                    <span className="table-header">Explorer:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      PolygonScan
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      MaticVigit
-                                    </span>
-                                    <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      SushiSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      QuickSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      Dfyn
-                                    </span>
-                                  </div>
-                                </Collapse>
-                              </div>
-                              <div className="accordion-item">
-                                <div className="accordion-header">
-                                  <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
-                                      <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col3} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
-                                    </Col>
-                                  </Row>
-                                </div>
-                                <Collapse isOpen={col3} className="accordion-collapse">
-                                    <div className="accordion-body wallet-detail">
+                                    <p className="explorer">
                                       <span className="table-header">Explorer:</span>
                                       <span className="item"> 
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
@@ -763,7 +720,9 @@ const Dashboard = (props) => {
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         MaticVigit
                                       </span>
-                                      <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
+                                    </p>
+                                    <p className="trade">
+                                      <span className="table-header">Trade:</span>
                                       <span className="item"> 
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         SushiSwap
@@ -776,6 +735,92 @@ const Dashboard = (props) => {
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         Dfyn
                                       </span>
+                                    </p>
+                                  </div>
+                                </Collapse>
+                              </div>
+                              <div className="accordion-item">
+                                <div className="accordion-header" onClick={t_col2} style={{ cursor: "pointer" }}>
+                                  <Row>
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
+                                      <span className= {col2? 'drop-btn':'drop-btn active'} onClick={t_col2} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                    </Col>
+                                  </Row>
+                                </div>
+
+                                <Collapse isOpen={col2} className="accordion-collapse">
+                                  <div className="accordion-body wallet-detail">
+                                      <p className="explorer">
+                                        <span className="table-header">Explorer:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          PolygonScan
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          MaticVigit
+                                        </span>
+                                      </p>
+                                      <p className="trade">
+                                        <span className="table-header">Trade:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          SushiSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          QuickSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          Dfyn
+                                        </span>
+                                      </p>
+                                    </div>
+                                </Collapse>
+                              </div>
+                              <div className="accordion-item">
+                                <div className="accordion-header" onClick={t_col3} style={{ cursor: "pointer" }}>
+                                  <Row>
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
+                                      <span className= {col3? 'drop-btn':'drop-btn active'} onClick={t_col3} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                    </Col>
+                                  </Row>
+                                </div>
+                                <Collapse isOpen={col3} className="accordion-collapse">
+                                  <div className="accordion-body wallet-detail">
+                                      <p className="explorer">
+                                        <span className="table-header">Explorer:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          PolygonScan
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          MaticVigit
+                                        </span>
+                                      </p>
+                                      <p className="trade">
+                                        <span className="table-header">Trade:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          SushiSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          QuickSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          Dfyn
+                                        </span>
+                                      </p>
                                     </div>
                                 </Collapse>
                               </div>
@@ -791,37 +836,37 @@ const Dashboard = (props) => {
                           <CardHeader>
                             <CardTitle className="h4">DEFI platform name</CardTitle>
                           </CardHeader>
-                          <CardBody>
+                          <CardBody style={{overflow:'auto'}}>
                             <div className="accordion" id="defi">
-                              <div className="accordion-item test">
+                              <div className="accordion-item">
                                 <Row className="table-header">
-                                  <Col sm="3"> Pool </Col>
-                                  <Col sm="3" className="balance">  Balances </Col>
-                                  <Col sm="2"> Rewards </Col>
-                                  <Col sm="2"> APR </Col>
-                                  <Col sm="2"> Value </Col>
+                                  <Col xs="3"> Pool </Col>
+                                  <Col xs="3" className="balance">  Balances </Col>
+                                  <Col xs="2"> Rewards </Col>
+                                  <Col xs="2"> APR </Col>
+                                  <Col xs="2"> Value </Col>
                                 </Row>
                               </div>
 
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col4} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
-                                    <Col sm="3" className="balance"> 
+                                    <Col xs="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
+                                    <Col xs="3" className="balance"> 
                                       <p className="m-0">2,109.5 WMATIC + 5,175.813 OMEN</p>
                                       <p className="symbol">$4547.66</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">7.735 OMEN</p>
                                       <p  className="symbol">$3423(1=$0.057)</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">788.14%</p>
                                       <p  className="symbol">2.16% daily</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       $4550.983
-                                      <span className= {col4? 'drop-btn active':'drop-btn'} onClick={t_col4} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                      <span className= {col4? 'drop-btn':'drop-btn active'} onClick={t_col4} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
@@ -829,85 +874,85 @@ const Dashboard = (props) => {
                                   <div className="accordion-body wallet-detail">
                                     <p className="detail-title"> Underlying Assets </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="minus change"> -1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="minus change"> -1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum" >
-                                      <Col sm="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <p className="detail-title"> Rewards </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum">
-                                      <Col sm="2"> TOTAL </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> TOTAL </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                   </div>
                                 </Collapse>
                               </div>
 
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col5} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
-                                    <Col sm="3" className="balance"> 
+                                    <Col xs="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
+                                    <Col xs="3" className="balance"> 
                                       <p className="m-0">2,109.5 WMATIC + 5,175.813 OMEN</p>
                                       <p className="symbol">$4547.66</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">7.735 OMEN</p>
                                       <p  className="symbol">$3423(1=$0.057)</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">788.14%</p>
                                       <p  className="symbol">2.16% daily</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       $4550.983
-                                      <span className= {col5? 'drop-btn active':'drop-btn'} onClick={t_col5} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                      <span className= {col5? 'drop-btn':'drop-btn active'} onClick={t_col5} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
@@ -915,78 +960,75 @@ const Dashboard = (props) => {
                                   <div className="accordion-body wallet-detail">
                                     <p className="detail-title"> Underlying Assets </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="minus change"> -1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="minus change"> -1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum" >
-                                      <Col sm="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <p className="detail-title"> Rewards </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum">
-                                      <Col sm="2"> TOTAL </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> TOTAL </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                   </div>
                                 </Collapse>
                               </div>
-
 
                             </div>
                           </CardBody>
                         </Card>
                       </Col>
                     </Row>
-
-
                   </TabPane>
                   <TabPane tabId="3">
                     <Row>
-                      <Col sm="12" className="statis">
+                      <Col sm={12} md={12} lg={6} className="statis-1">
                         <div className="mr-56 ">
                           <p className="statis-title">Net worth</p>
                           <p className="statis-detail" >$0 <span className="plus change"> + $0 </span> </p>
@@ -1003,6 +1045,8 @@ const Dashboard = (props) => {
                           <p className="statis-title">Total debts</p>
                           <p className="statis-detail" >$0</p>
                         </div>
+                      </Col>
+                      <Col sm={12} md={12} lg={6} className="statis-2">
                         <div className="mr-56 ">
                           <p className="statis-title">APR daily/yearly</p>
                           <p className="statis-detail" >7.15/788.14%</p>
@@ -1010,23 +1054,22 @@ const Dashboard = (props) => {
                         <div className="mr-56 ">
                           <p className="statis-title">Prediction Profit daily/yearly</p>
                           <p className="statis-detail" >1.911/11.931</p>
-                        </div>
-
+                        </div>  
                       </Col>
                     </Row>
 
                     <Row>
-                      <Col sm="6">
+                      <Col sm={12} md={12} lg={6}>
                         <Card>
                           <CardHeader>
                             <CardTitle className="h4">Portfolio Exposure</CardTitle>
                           </CardHeader>
-                          <CardBody style={{ height:'320px' }}>
+                          <CardBody>
                             <Row style={{height:'100%'}}>
-                              <Col sm="7">
+                              <Col sm={12} md={12} lg={7}>
                                 <ReactApexChart options={options} series={series} type="donut" height="300px" />
                               </Col>
-                              <Col sm="5">
+                              <Col sm={12} md={12} lg={5}>
                                 <div className="chart-legend">
                                 {
                                   series.map( (val, id) => 
@@ -1043,19 +1086,19 @@ const Dashboard = (props) => {
                           </CardBody>
                         </Card>
                       </Col>
-                      <Col sm="6">
+                      <Col sm={12} md={12} lg={6}>
                         <Card>
                           <CardHeader>
                             <CardTitle className="h4">Asset Allocation</CardTitle>
                           </CardHeader>
-                          <CardBody style={{ height:'320px' }}>
+                          <CardBody>
                             <Row style={{height:'100%'}}>
                               <Col sm="12">
                                 <div className="asset-prog">
                                   {
                                     series.map( (val, id) => 
                                       <div key={id} className="prog">
-                                        <p style={{width:'20%', margin:'0'}}> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
+                                        <p className="asset-name"> <img src="assets/img/FTM-logo.png"/> { options['labels'][id] } </p>
                                         <Progress color="warning" value={val}></Progress>
                                         <span className="series"> {val} % </span>
                                       </div>
@@ -1073,112 +1116,43 @@ const Dashboard = (props) => {
                         <Card>
                           <CardHeader>
                             <CardTitle>
-                              <span> Wallet </span>
-                              <input className="hide-check" type="checkbox" value="" id="defaultCheck1" />
-                              <span className="check-label">Hide small balances</span>
-                              <span className="table-header" style={{float:'right'}}> Assets <span style={{color:'#FFC519', fontSize:'16px', fontWeight:'700', marginLeft:'5px'}}> $5.066 </span> </span>
+                              <p className="d-response">
+                                <span> Wallet </span>
+                                <input className="hide-check" type="checkbox" value="" id="defaultCheck1" title="Hide small balances" />
+                                <span className="check-label">Hide small balances</span>
+                                <span className="table-header" style={{float:'right'}}> Assets <span style={{color:'#FFC519', fontSize:'16px', fontWeight:'700', marginLeft:'5px'}}> $5.066 </span> </span>
+                              </p>
+                              <p className="m-response">
+                                <input className="hide-check" type="checkbox" value="" id="defaultCheck1" title="Hide small balances" />
+                                <span className="check-label">Hide small balances</span>
+                              </p>
+
                             </CardTitle>
                           </CardHeader>
-                          <CardBody>
+                          <CardBody style={{overflow:'auto'}}>
                             <div className="accordion" id="walletScan">
                               <div className="accordion-item">
                                 <Row className="table-header">
-                                  <Col sm="3"> Assets </Col>
-                                  <Col sm="3"> Balances </Col>
-                                  <Col sm="3"> Price </Col>
-                                  <Col sm="3"> Value </Col>
+                                  <Col lx="3"> Assets </Col>
+                                  <Col lx="3"> Balances </Col>
+                                  <Col lx="3"> Price </Col>
+                                  <Col lx="3"> Value </Col>
                                 </Row>
                               </div>
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col1} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
                                       <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col1} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
                                 <Collapse isOpen={col1} className="accordion-collapse">
                                   <div className="accordion-body wallet-detail">
-                                    <span className="table-header">Explorer:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      PolygonScan
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      MaticVigit
-                                    </span>
-                                    <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      SushiSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      QuickSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      Dfyn
-                                    </span>
-                                  </div>
-                                </Collapse>
-                              </div>
-                              <div className="accordion-item">
-                                <div className="accordion-header">
-                                  <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
-                                      <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col2} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
-                                    </Col>
-                                  </Row>
-                                </div>
-
-                                <Collapse isOpen={col2} className="accordion-collapse">
-                                    <div className="accordion-body wallet-detail">
-                                    <span className="table-header">Explorer:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      PolygonScan
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      MaticVigit
-                                    </span>
-                                    <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      SushiSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      QuickSwap
-                                    </span>
-                                    <span className="item"> 
-                                      <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
-                                      Dfyn
-                                    </span>
-                                  </div>
-                                </Collapse>
-                              </div>
-                              <div className="accordion-item">
-                                <div className="accordion-header">
-                                  <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                    <Col sm="3"> 1.931 </Col>
-                                    <Col sm="3"> $1.07 </Col>
-                                    <Col sm="3"> $2.066
-                                      <span className= {col1? 'drop-btn':'drop-btn active'} onClick={t_col3} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
-                                    </Col>
-                                  </Row>
-                                </div>
-                                <Collapse isOpen={col3} className="accordion-collapse">
-                                    <div className="accordion-body wallet-detail">
+                                    <p className="explorer">
                                       <span className="table-header">Explorer:</span>
                                       <span className="item"> 
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
@@ -1188,7 +1162,9 @@ const Dashboard = (props) => {
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         MaticVigit
                                       </span>
-                                      <span className="table-header" style={{marginLeft:'20px'}}>Trade:</span>
+                                    </p>
+                                    <p className="trade">
+                                      <span className="table-header">Trade:</span>
                                       <span className="item"> 
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         SushiSwap
@@ -1201,6 +1177,92 @@ const Dashboard = (props) => {
                                         <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
                                         Dfyn
                                       </span>
+                                    </p>
+                                  </div>
+                                </Collapse>
+                              </div>
+                              <div className="accordion-item">
+                                <div className="accordion-header" onClick={t_col2} style={{ cursor: "pointer" }}>
+                                  <Row>
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
+                                      <span className= {col2? 'drop-btn':'drop-btn active'} onClick={t_col2} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                    </Col>
+                                  </Row>
+                                </div>
+
+                                <Collapse isOpen={col2} className="accordion-collapse">
+                                  <div className="accordion-body wallet-detail">
+                                      <p className="explorer">
+                                        <span className="table-header">Explorer:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          PolygonScan
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          MaticVigit
+                                        </span>
+                                      </p>
+                                      <p className="trade">
+                                        <span className="table-header">Trade:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          SushiSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          QuickSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          Dfyn
+                                        </span>
+                                      </p>
+                                    </div>
+                                </Collapse>
+                              </div>
+                              <div className="accordion-item">
+                                <div className="accordion-header" onClick={t_col3} style={{ cursor: "pointer" }}>
+                                  <Row>
+                                    <Col lx="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                    <Col lx="3"> 1.931 </Col>
+                                    <Col lx="3"> $1.07 </Col>
+                                    <Col lx="3"> $2.066
+                                      <span className= {col3? 'drop-btn':'drop-btn active'} onClick={t_col3} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                    </Col>
+                                  </Row>
+                                </div>
+                                <Collapse isOpen={col3} className="accordion-collapse">
+                                  <div className="accordion-body wallet-detail">
+                                      <p className="explorer">
+                                        <span className="table-header">Explorer:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          PolygonScan
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          MaticVigit
+                                        </span>
+                                      </p>
+                                      <p className="trade">
+                                        <span className="table-header">Trade:</span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          SushiSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          QuickSwap
+                                        </span>
+                                        <span className="item"> 
+                                          <img src="assets/img/FTM-logo.png" width="20px" height="20px" />
+                                          Dfyn
+                                        </span>
+                                      </p>
                                     </div>
                                 </Collapse>
                               </div>
@@ -1216,37 +1278,37 @@ const Dashboard = (props) => {
                           <CardHeader>
                             <CardTitle className="h4">DEFI platform name</CardTitle>
                           </CardHeader>
-                          <CardBody>
+                          <CardBody style={{overflow:'auto'}}>
                             <div className="accordion" id="defi">
-                              <div className="accordion-item test">
+                              <div className="accordion-item">
                                 <Row className="table-header">
-                                  <Col sm="3"> Pool </Col>
-                                  <Col sm="3" className="balance">  Balances </Col>
-                                  <Col sm="2"> Rewards </Col>
-                                  <Col sm="2"> APR </Col>
-                                  <Col sm="2"> Value </Col>
+                                  <Col xs="3"> Pool </Col>
+                                  <Col xs="3" className="balance">  Balances </Col>
+                                  <Col xs="2"> Rewards </Col>
+                                  <Col xs="2"> APR </Col>
+                                  <Col xs="2"> Value </Col>
                                 </Row>
                               </div>
 
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col4} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
-                                    <Col sm="3" className="balance"> 
+                                    <Col xs="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
+                                    <Col xs="3" className="balance"> 
                                       <p className="m-0">2,109.5 WMATIC + 5,175.813 OMEN</p>
                                       <p className="symbol">$4547.66</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">7.735 OMEN</p>
                                       <p  className="symbol">$3423(1=$0.057)</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">788.14%</p>
                                       <p  className="symbol">2.16% daily</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       $4550.983
-                                      <span className= {col4? 'drop-btn active':'drop-btn'} onClick={t_col4} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                      <span className= {col4? 'drop-btn':'drop-btn active'} onClick={t_col4} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
@@ -1254,85 +1316,85 @@ const Dashboard = (props) => {
                                   <div className="accordion-body wallet-detail">
                                     <p className="detail-title"> Underlying Assets </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="minus change"> -1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="minus change"> -1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum" >
-                                      <Col sm="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <p className="detail-title"> Rewards </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum">
-                                      <Col sm="2"> TOTAL </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> TOTAL </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                   </div>
                                 </Collapse>
                               </div>
 
                               <div className="accordion-item">
-                                <div className="accordion-header">
+                                <div className="accordion-header" onClick={t_col5} style={{ cursor: "pointer" }}>
                                   <Row>
-                                    <Col sm="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
-                                    <Col sm="3" className="balance"> 
+                                    <Col xs="3"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC + OMEN </Col>
+                                    <Col xs="3" className="balance"> 
                                       <p className="m-0">2,109.5 WMATIC + 5,175.813 OMEN</p>
                                       <p className="symbol">$4547.66</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">7.735 OMEN</p>
                                       <p  className="symbol">$3423(1=$0.057)</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       <p className="m-0">788.14%</p>
                                       <p  className="symbol">2.16% daily</p>
                                     </Col>
-                                    <Col sm="2">
+                                    <Col xs="2">
                                       $4550.983
-                                      <span className= {col5? 'drop-btn active':'drop-btn'} onClick={t_col5} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
+                                      <span className= {col5? 'drop-btn':'drop-btn active'} onClick={t_col5} style={{ cursor: "pointer" }}> <i className="bx bx-caret-up"></i> </span> 
                                     </Col>
                                   </Row>
                                 </div>
@@ -1340,66 +1402,65 @@ const Dashboard = (props) => {
                                   <div className="accordion-body wallet-detail">
                                     <p className="detail-title"> Underlying Assets </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="minus change"> -1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="minus change"> -1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum" >
-                                      <Col sm="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <span style={{fontWeight:'900'}}> TOTAL </span> </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <p className="detail-title"> Rewards </p>
                                     <Row className="table-header">
-                                      <Col sm="2"> Asset </Col>
-                                      <Col sm="2"> Price </Col>
-                                      <Col sm="2"> Balance </Col>
-                                      <Col sm="3"> 24h changes </Col>
-                                      <Col sm="3"> Value </Col>
+                                      <Col xs="2"> Asset </Col>
+                                      <Col xs="2"> Price </Col>
+                                      <Col xs="2"> Balance </Col>
+                                      <Col xs="3"> 24h changes </Col>
+                                      <Col xs="3"> Value </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row">
-                                      <Col sm="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
-                                      <Col sm="2"> $0.17 </Col>
-                                      <Col sm="2"> 2109.5 </Col>
-                                      <Col sm="3" className="plus change"> +1.5%($2018.545) </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> <img src="assets/img/FTM-logo.png" width="20px" height="20px" /> WMATIC </Col>
+                                      <Col xs="2"> $0.17 </Col>
+                                      <Col xs="2"> 2109.5 </Col>
+                                      <Col xs="3" className="plus change"> +1.5%($2018.545) </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                     <Row className="table-row total-sum">
-                                      <Col sm="2"> TOTAL </Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="2"></Col>
-                                      <Col sm="3"> </Col>
-                                      <Col sm="3"> $2257.164 </Col>
+                                      <Col xs="2"> TOTAL </Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="2"></Col>
+                                      <Col xs="3"> </Col>
+                                      <Col xs="3"> $2257.164 </Col>
                                     </Row>
                                   </div>
                                 </Collapse>
                               </div>
-
 
                             </div>
                           </CardBody>
@@ -1412,10 +1473,10 @@ const Dashboard = (props) => {
             </Row>
           </Container>
           :
-          <Container>
+          <Container fluid>
             <Row>
-              <Col sm="12">
-              <Nav tabs className="nav-tabs-custom mx-3">
+              <Col sm="12" style={{paddingRight:'0', paddingLeft:'0'}}>
+                <Nav tabs className="nav-tabs-custom">
                   <NavItem>
                     <NavLink style={{ cursor: "pointer" }}
                       className={classnames({ active: customActiveTab === "1"})} onClick={() => { toggleCustom("1") }} >

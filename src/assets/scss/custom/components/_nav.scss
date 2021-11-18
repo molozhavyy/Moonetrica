@@ -60,6 +60,8 @@ color: #495057;
     .nav-link {
       border: none;
       opacity: 0.5;
+      padding: 8px 18px 20px !important;
+      font-size: 16px !important;
 
       &::after {
         content: "";

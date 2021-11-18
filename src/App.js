@@ -25,6 +25,7 @@ import "./assets/scss/theme.scss"
 // import { initFirebaseBackend } from "./helpers/firebase_helper"
 
 import fakeBackend from "./helpers/AuthType/fakeBackend"
+import {connectWallet} from "./helpers/wallet_helper"
 
 // Activating fake backend
 fakeBackend()
@@ -46,18 +47,27 @@ fakeBackend()
 
 function App() {
   const [walletAddress, setWalletAddress] = useState(null);
+  
+  const onClickConnectWallet = async () => {
+    const walletAddr = await connectWallet();
+    setWalletAddress(walletAddr);
+  }
+
+  const onClickDisconnectWallet = async () => {
+    setWalletAddress(null)
+  }
 
   return (
     <div className="App">
       <Router>
         <Route path='/dashboard'>
-          <VerticalLayout walletAddress={walletAddress} setWalletAddress={setWalletAddress}>
+          <VerticalLayout walletAddress={walletAddress} setWalletAddress={setWalletAddress} onClickDisconnectWallet={onClickDisconnectWallet} onClickConnectWallet={onClickConnectWallet} >
             <Dashboard walletAddress={walletAddress} />
           </VerticalLayout>
         </Route>
 
         <Route exact path='/'>
-          <VerticalLayout walletAddress={walletAddress} setWalletAddress={setWalletAddress}>
+          <VerticalLayout walletAddress={walletAddress} setWalletAddress={setWalletAddress} onClickDisconnectWallet={onClickDisconnectWallet} onClickConnectWallet={onClickConnectWallet} >
             <Dashboard walletAddress={walletAddress} />
           </VerticalLayout>
         </Route>

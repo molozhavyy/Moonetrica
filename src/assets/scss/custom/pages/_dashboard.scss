@@ -1,19 +1,29 @@
 .dashboard {
     font-family: Raleway;
     padding-right: 32px !important;
-    padding-left: 0 !important;
+    padding-left: 20px !important;
+    @media (max-width: 992px) {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+      }
 }
 
 .nav-link {
     padding:8px 16px 20px !important;
     img {
         margin-right: 10px;
+        @media (max-width: 992px) {
+            margin: 0;
+        }
     }
     span {
         font-family: Raleway;
         font-weight: 600;
         font-size: 16px;
         line-height: 19px;
+        @media (max-width: 992px) {
+            display: none;
+        }
     }
 
 }
@@ -46,14 +56,28 @@
 }
 
 
-.statis {
+.statis-1 {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
+    justify-content: space-between;
 }
-.statis div {
-    margin-right: 56px;
+.statis-2 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: space-evenly;
+    @media (max-width: 992px) {
+        justify-content: space-between;
+    }
+
 }
+// .statis div {
+//     margin-right: 56px;
+//     @media (max-width: 992px) {
+//         margin: 0;
+//     }
+// }
 .statis-title {
     color: #FFF;
     opacity: 0.5;
@@ -69,16 +93,18 @@
     font-weight: bold;
 }
 /* Portfolio Exposure Section */
+.apexcharts-canvas {
+    margin: auto;
+}
 .chart-legend {
     width: 100%;
     height: 100%;
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
     overflow-y: scroll;
     height: 300px;
-
     p {
         margin-bottom: 30px;
     }
@@ -107,11 +133,21 @@
     width: 100%;
     height: 100%;
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
     overflow-y: scroll;
     height: 300px;
+
+    .asset-name {
+        width: 20%;
+        margin: 0;
+        @media (max-width: 600px) {
+            width: 100%;
+        }
+    }
+
+
     .prog {
         display: flex;
         align-items: center;
@@ -127,10 +163,16 @@
     .progress {
         width: 70%;
         height: 4px;
+        @media (max-width: 600px) {
+            width: 85%;
+        }
     }
     .series {
         width: 10%;
         text-align: right;
+        @media (max-width: 600px) {
+            width: 15%;
+        }
     }
 }
 
@@ -141,6 +183,8 @@
 /* Wallet Section */
 #walletScan {
     padding: 0 15px;
+    min-width: 600px;
+    overflow-x: scroll;
     img {
         margin-right: 7px;
     }
@@ -159,7 +203,32 @@
 }
 .check-label {
     font-size: 14px;
+    // @media (max-width: 600px) {
+    //     display: none;
+    // }
 }
+
+.m-response {
+    display: none;
+    .hide-check {
+        margin-left: 0;
+    }
+    @media (max-width: 600px) {
+        display: block;
+    }
+}
+
+.d-response {
+    .hide-check, .check-label {
+        display: initial;
+        @media (max-width: 599px) {
+            display: none;
+        }
+    }
+}
+
+
+
 
 .accordion-header {
     font-weight: bold;
@@ -183,9 +252,27 @@
         margin-right: 10px;
     }
 }
+.wallet-detail .explorer {
+    display: inline;
+    @media (max-width: 992px) {
+        display: block;
+    }
+}
+.wallet-detail .trade {
+    display: inline;
+    padding-left: 20px;
+    @media (max-width: 992px) {
+        display: block;
+        padding-left: 0;
+        margin: 0;
+    }
+}
+
+
 
 /* Defi Section */
 #defi {
+    min-width: 800px;
     font-weight: bold;
     font-size: 16px;
     line-height: 19px;
@@ -229,6 +316,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 400px;
 }
 .banner-title {
     font-family: Raleway;

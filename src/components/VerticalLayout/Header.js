@@ -16,7 +16,7 @@ import { wallet } from 'common/data';
 
 const Header = (props) => {
 
-  const { walletAddress, setWalletAddress } = props
+  const { walletAddress, setWalletAddress, onClickDisconnectWallet, onClickConnectWallet } = props
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
   const [position, setPosition] = useState();
   const [open, setOpen] = useState(false);
@@ -24,26 +24,31 @@ const Header = (props) => {
 
   function tToggle() {
     var body = document.body;
-    if (window.screen.width <= 998) {
-      body.classList.toggle("sidebar-enable");
-    } else {
-      body.classList.toggle("vertical-collpsed");
-      body.classList.toggle("sidebar-enable");
-    }
+    body.classList.toggle("vertical-collpsed");
+    body.classList.toggle("sidebar-enable");
+    // if (window.screen.width <= 998) {
+    //   body.classList.toggle("sidebar-enable");
+    // } else {
+    //   body.classList.toggle("vertical-collpsed");
+    //   body.classList.toggle("sidebar-enable");
+    // }
   }
 
   return (
       <header id="page-topbar">
         <div className="header-body">
           <div className="navbar-brand-box">
-            <Link to="/" className="logo logo-light" style={{textAlign:'left'}}>
+            <Link to="/" className="logo logo-light" style={{textAlign:'left', display:'inline'}}>
               <span className="logo-sm">
-                <img src="assets/img/logo.svg" width="160px" height="16px" />
+                <img src="assets/img/logo-sm.png" width="32px" height="32px" />
               </span>
               <span className="logo-lg">
                 <img src="assets/img/logo.svg" width="160px" height="16px" />
               </span>
             </Link>
+            <button type="button" onClick={() => {tToggle()}} className="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
+              <i className="fa fa-fw fa-bars" />
+            </button>
           </div>
           {
             walletAddress ?
@@ -60,13 +65,13 @@ const Header = (props) => {
                 <span style={{color:'#FFF', fontSize:'16px'}}> <i className="bx bx-wallet"></i> </span> 
                 { walletAddress.slice(0, 12) }...
               </p>
-              <span style={{color:'#FFF', cursor:'pointer', fontSize:'20px'}} onClick={e => setWalletAddress("")}>
+              <span style={{color:'#FFF', cursor:'pointer', fontSize:'20px'}} onClick={e => onClickDisconnectWallet() }>
                 <i className="mdi mdi-logout"></i>
               </span>
             </React.Fragment>
             :
             <React.Fragment>
-              <p id="connectBtn" onClick={e => setWalletAddress("0x87FBF0079d5Bb9Ea8FBF3805111FeEFF1Dd696Fc")}>
+              <p id="connectBtn" onClick={e => onClickConnectWallet()}>
                 Connect wallet
               </p>
             </React.Fragment>
@@ -79,6 +84,8 @@ const Header = (props) => {
 Header.propTypes = {
   walletAddress: PropTypes.string,
   setWalletAddress: PropTypes.func,
+  onClickDisconnectWallet: PropTypes.func,
+  onClickConnectWallet: PropTypes.func,
 }
 
 export default Header;

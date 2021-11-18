@@ -41,23 +41,28 @@
 
 .navbar-brand-box {
   padding: 0 0;
-  text-align: center;
+  text-align: left;
   position: fixed;
   left: 32px;
   width: $navbar-brand-box-width;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  
+
 }
 
-.logo {
-  line-height: 70px;
+// .logo {
+//   line-height: 70px;
 
-  .logo-sm {
-    display: none;
-  }
-}
+//   .logo-sm {
+//     display: none;
+//   }
+// }
 
-.logo-light {
-  display: none;
-}
+// .logo-light {
+//   display: none;
+// }
 
 /* Search */
 
@@ -101,19 +106,19 @@
     width: auto;
   }
 
-  .logo {
-    span.logo-lg {
-      display: none;
-    }
+  // .logo {
+  //   span.logo-lg {
+  //     display: none;
+  //   }
 
-    span.logo-sm {
-      display: inline-block;
-    }
-  }
+  //   span.logo-sm {
+  //     display: inline-block;
+  //   }
+  // }
 }
 
 .page-content {
-  padding: calc(#{$header-height} + #{$grid-gutter-width})
+  padding: 110px
     calc(#{$grid-gutter-width} / 2) $footer-height
     calc(#{$grid-gutter-width} / 2);
 }

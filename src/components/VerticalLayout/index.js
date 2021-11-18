@@ -21,7 +21,7 @@ import Rightbar from "../CommonForBoth/RightSidebar"
 import { useSelector, useDispatch } from "react-redux"
 
 const Layout = props => {
-  const { walletAddress, setWalletAddress } = props
+  const { walletAddress, setWalletAddress, onClickDisconnectWallet, onClickConnectWallet } = props
   const dispatch = useDispatch()
 
   const {
@@ -125,7 +125,7 @@ const Layout = props => {
       </div>
 
       <div id="layout-wrapper">
-        <Header toggleMenuCallback={toggleMenuCallback} walletAddress = {walletAddress} setWalletAddress = {setWalletAddress} />
+        <Header toggleMenuCallback={toggleMenuCallback} walletAddress = {walletAddress} setWalletAddress = {setWalletAddress} onClickDisconnectWallet={onClickDisconnectWallet} onClickConnectWallet={onClickConnectWallet} />
         <Sidebar
           theme={leftSideBarTheme}
           type={leftSideBarType}
@@ -156,6 +156,8 @@ Layout.propTypes = {
   topbarTheme: PropTypes.any,
   walletAddress: PropTypes.any,
   setWalletAddress: PropTypes.func,
+  onClickDisconnectWallet: PropTypes.func, 
+  onClickConnectWallet: PropTypes.func
 }
 
 export default withRouter(Layout)

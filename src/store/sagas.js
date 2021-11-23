@@ -17,6 +17,7 @@ import mailsSaga from "./mails/saga"
 import contactsSaga from "./contacts/saga";
 import dashboardSaga from "./dashboard/saga";
 import dashboardSaasSaga from "./dashboard-saas/saga";
+import walletSaga from "./wallet/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -36,6 +37,7 @@ export default function* rootSaga() {
     fork(tasksSaga),
     fork(contactsSaga),
     fork(dashboardSaga),
-    fork(dashboardSaasSaga)
+    fork(dashboardSaasSaga),
+    fork(walletSaga)
   ])
 }

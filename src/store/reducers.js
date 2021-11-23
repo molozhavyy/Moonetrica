@@ -42,6 +42,9 @@ import Dashboard from "./dashboard/reducer";
 //Dasboard saas
 import DashboardSaas from "./dashboard-saas/reducer";
 
+//Wallet
+import Wallet from "./wallet/reducer";
+
 const rootReducer = combineReducers({
   // public
   Layout,
@@ -59,7 +62,8 @@ const rootReducer = combineReducers({
   tasks,
   contacts,
   Dashboard,
-  DashboardSaas
+  DashboardSaas,
+  Wallet
 })
 
 export default rootReducer

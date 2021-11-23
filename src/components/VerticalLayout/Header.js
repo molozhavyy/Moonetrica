@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from "react"
+import { useSelector, useDispatch } from 'react-redux'
 
 import "../../assets/scss/custom/components/_header.scss";
 
@@ -16,7 +17,9 @@ import { wallet } from 'common/data';
 
 const Header = (props) => {
 
-  const { walletAddress, setWalletAddress, onClickDisconnectWallet, onClickConnectWallet } = props
+  const walletAddress = useSelector((state) => state.Wallet.walletAddress )
+  const dispatch = useDispatch()
+
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
   const [position, setPosition] = useState();
   const [open, setOpen] = useState(false);
@@ -26,12 +29,6 @@ const Header = (props) => {
     var body = document.body;
     body.classList.toggle("vertical-collpsed");
     body.classList.toggle("sidebar-enable");
-    // if (window.screen.width <= 998) {
-    //   body.classList.toggle("sidebar-enable");
-    // } else {
-    //   body.classList.toggle("vertical-collpsed");
-    //   body.classList.toggle("sidebar-enable");
-    // }
   }
 
   return (
@@ -65,13 +62,13 @@ const Header = (props) => {
                 <span style={{color:'#FFF', fontSize:'16px'}}> <i className="bx bx-wallet"></i> </span> 
                 { walletAddress.slice(0, 12) }...
               </p>
-              <span style={{color:'#FFF', cursor:'pointer', fontSize:'20px'}} onClick={e => onClickDisconnectWallet() }>
+              <span style={{color:'#FFF', cursor:'pointer', fontSize:'20px'}} onClick={() => dispatch({ type: 'WALLET_DISCONNECT' })}>
                 <i className="mdi mdi-logout"></i>
               </span>
             </React.Fragment>
             :
             <React.Fragment>
-              <p id="connectBtn" onClick={e => onClickConnectWallet()}>
+              <p id="connectBtn" onClick={() => dispatch({ type: 'WALLET_CONNECT' })}>
                 Connect wallet
               </p>
             </React.Fragment>

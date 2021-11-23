@@ -1,0 +1,5 @@
+/** Get Dashboard Chart data */
+export const WALLET_CONNECT = "WALLET_CONNECT";
+export const WALLET_DISCONNECT = "WALLET_DISCONNECT";
+export const CONNECT_SUCCESS = "CONNECT_SUCCESS";
+export const DISCONNECT_SUCCESS = "DISCONNECT_SUCCESS";

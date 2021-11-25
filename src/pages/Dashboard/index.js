@@ -70,12 +70,8 @@ const Dashboard = props => {
             : 1
         )
       )
-      // const responseDefiList = await fetch(
-      //   `${baseUrl}/portfolio/project_list?user_addr=${walletAddress}`
-      // )
-      // 0x31C88183A443b291d94Eb9B9db217Be9f017cC82
       const responseDefiList = await fetch(
-        `${baseUrl}/portfolio/project_list?user_addr=0x31C88183A443b291d94Eb9B9db217Be9f017cC82`
+        `${baseUrl}/portfolio/project_list?user_addr=${walletAddress}`
       )
       const dataDefiList = await responseDefiList.json()
       console.log("dataDefiList:", dataDefiList.data)

@@ -2,14 +2,19 @@ import Onboard from "bnc-onboard"
 // import { ethers } from 'ethers';
 // import { chainId, contractAddress } from '../constants/address'
 
-const chainId = 4
-const RPC_URL = "https://rinkeby.infura.io/v3/ea4e9dbe0feb463da320e8bd8056f82f"
-const INFURA_KEY = "ea4e9dbe0feb463da320e8bd8056f82f"
+const chainId = 56
+const rpcUrl = "https://bsc-dataseed1.defibit.io"
+// const RPC_URL = "https://rinkeby.infura.io/v3/ea4e9dbe0feb463da320e8bd8056f82f";
+// const INFURA_KEY = "ea4e9dbe0feb463da320e8bd8056f82f";
 
 const wallets = [
   { walletName: "metamask", preferred: true },
-  { walletName: "trust", preferred: true, rpcUrl: RPC_URL },
-  { walletName: "walletConnect", preferred: true, infuraKey: INFURA_KEY },
+  { walletName: "trust", preferred: true, rpcUrl: rpcUrl },
+  {
+    walletName: "walletConnect",
+    preferred: true,
+    rpc: { [chainId]: rpcUrl } /*infuraKey: INFURA_KEY*/,
+  },
 ]
 
 let walletProvider
@@ -38,7 +43,7 @@ export const connectWallet = async () => {
     const walletCheck = await onboard.walletCheck()
     if (walletCheck === true) {
       const currentState = onboard.getState()
-      console.log("currentState", currentState)
+      console.log("wallet", currentState["address"])
       return currentState["address"]
     } else {
       return ""

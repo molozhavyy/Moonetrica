@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 import React from "react"
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useMemo } from "react"
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import { connect } from "react-redux"
 
 // Import Routes all
@@ -25,7 +25,7 @@ import "./assets/scss/theme.scss"
 // import { initFirebaseBackend } from "./helpers/firebase_helper"
 
 import fakeBackend from "./helpers/AuthType/fakeBackend"
-import {connectWallet} from "./helpers/wallet_helper"
+import { connectWallet } from "./helpers/wallet_helper"
 
 // Activating fake backend
 fakeBackend()
@@ -44,25 +44,23 @@ fakeBackend()
 // init firebase backend
 // initFirebaseBackend(firebaseConfig)
 
-
 const App = () => {
-
   return (
-      <div className="App">
-        <Router>
-          <Route path='/dashboard'>
-            <VerticalLayout>
-              <Dashboard />
-            </VerticalLayout>
-          </Route>
-          <Route exact path='/'>
-            <VerticalLayout >
-              <Dashboard />
-            </VerticalLayout>
-          </Route>
-        </Router>
-      </div>
-  );
+    <div className="App">
+      <Router>
+        <Route path="/dashboard">
+          <VerticalLayout>
+            <Dashboard />
+          </VerticalLayout>
+        </Route>
+        <Route exact path="/">
+          <VerticalLayout>
+            <Dashboard />
+          </VerticalLayout>
+        </Route>
+      </Router>
+    </div>
+  )
 }
 
 export default App
